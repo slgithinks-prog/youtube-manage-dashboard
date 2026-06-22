@@ -83,7 +83,7 @@ document.getElementById('pw').addEventListener('keydown',e=>{ if(e.key==='Enter'
 if (sessionStorage.getItem('ok')==='1'){
   document.getElementById('gate').style.display='none';
   document.getElementById('main').style.display='block';
-  window.addEventListener('DOMContentLoaded', init);
+  init();   // script가 body 끝이라 DOM은 이미 준비됨 — 바로 호출 (재방문 시 빈 화면 방지)
 }
 
 // ── 데이터 로드 & 렌더 ───────────────────────────
