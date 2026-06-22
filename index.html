@@ -3,28 +3,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>나비스 채널 피드백 보드 (비공개)</title>
 <style>
- :root{color-scheme:light}
- body{font-family:system-ui,'Malgun Gothic',sans-serif;margin:0;background:#ffffff;color:#1a1f29}
- .top{padding:18px 24px;background:#f5f7fa;border-bottom:1px solid #e3e8ef;position:sticky;top:0}
- .top h1{margin:0;font-size:18px} .top p{margin:4px 0 0;color:#5b6573;font-size:13px}
+ :root{color-scheme:dark}
+ body{font-family:system-ui,'Malgun Gothic',sans-serif;margin:0;background:#0f1115;color:#e6e6e6}
+ .top{padding:18px 24px;background:#161a22;border-bottom:1px solid #262b36;position:sticky;top:0}
+ .top h1{margin:0;font-size:18px} .top p{margin:4px 0 0;color:#9aa4b2;font-size:13px}
  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:16px;padding:20px}
- .card{background:#ffffff;border:1px solid #e3e8ef;border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
- .card h2{margin:0;font-size:17px} .card h2 a{color:#1565c0;text-decoration:none} .card h2 small{color:#7a8493;font-weight:400;font-size:13px}
- .meta{margin:6px 0 12px;color:#5b6573;font-size:13px}
- .badge{display:inline-block;background:#e7f0fb;color:#1565c0;border-radius:6px;padding:1px 7px;font-size:11px;margin-right:4px}
- .badge.done{background:#e3f5e9;color:#1c7a43} .badge.todo{background:#fbf0dd;color:#9a6a12}
- .btn{display:inline-block;background:#eef2f7;color:#1565c0;text-decoration:none;border-radius:8px;padding:6px 10px;font-size:13px;margin:0 6px 6px 0;border:1px solid #dde3ec}
- .block{margin:10px 0} .block b{font-size:12px;color:#5b6573}
- .chips{margin-top:5px} .chips a{display:inline-block;background:#eef2f7;color:#1565c0;text-decoration:none;border-radius:6px;padding:4px 9px;font-size:12px;margin:0 5px 5px 0;border:1px solid #dde3ec}
- .thumbs{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px} .thumbs img{width:120px;height:68px;object-fit:cover;border-radius:6px;background:#eee;border:1px solid #e3e8ef}
- details{margin-top:10px;border-top:1px solid #e3e8ef;padding-top:8px}
- summary{cursor:pointer;list-style:none;display:inline-block;background:#eef2f7;color:#1565c0;border-radius:8px;padding:6px 12px;font-size:13px;user-select:none;border:1px solid #dde3ec}
+ .card{background:#161a22;border:1px solid #262b36;border-radius:12px;padding:16px}
+ .card h2{margin:0;font-size:17px} .card h2 a{color:#7db4ff;text-decoration:none} .card h2 small{color:#8b95a4;font-weight:400;font-size:13px}
+ .meta{margin:6px 0 12px;color:#aeb6c2;font-size:13px}
+ .badge{display:inline-block;background:#22303f;color:#9fd0ff;border-radius:6px;padding:1px 7px;font-size:11px;margin-right:4px}
+ .badge.done{background:#1e3a2b;color:#86e3a8} .badge.todo{background:#3a2e1e;color:#e3c386}
+ .btn{display:inline-block;background:#22303f;color:#cfe3ff;text-decoration:none;border-radius:8px;padding:6px 10px;font-size:13px;margin:0 6px 6px 0}
+ .block{margin:10px 0} .block b{font-size:12px;color:#9aa4b2}
+ .chips{margin-top:5px} .chips a{display:inline-block;background:#1c2330;color:#cfe3ff;text-decoration:none;border-radius:6px;padding:4px 9px;font-size:12px;margin:0 5px 5px 0}
+ .thumbs{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px} .thumbs img{width:120px;height:68px;object-fit:cover;border-radius:6px;background:#222}
+ details{margin-top:10px;border-top:1px solid #262b36;padding-top:8px}
+ summary{cursor:pointer;list-style:none;display:inline-block;background:#22303f;color:#cfe3ff;border-radius:8px;padding:6px 12px;font-size:13px;user-select:none}
  summary::-webkit-details-marker{display:none} details[open] summary{margin-bottom:6px}
- .feedback{margin:6px 0 4px 4px;font-size:14px;line-height:1.55} .feedback h4{margin:12px 0 4px;color:#1565c0;font-size:14px} .feedback h5{margin:8px 0 2px;font-size:13px} .feedback p{margin:3px 0}
- .feedback.empty{color:#8a93a0;font-style:italic}
- .fb-pre{color:#7a8493;font-size:12px;margin:6px 0 8px}
+ .feedback{margin:6px 0 4px 4px;font-size:14px;line-height:1.55} .feedback h4{margin:12px 0 4px;color:#9fd0ff;font-size:14px} .feedback h5{margin:8px 0 2px;font-size:13px} .feedback p{margin:3px 0}
+ .feedback.empty{color:#7c8696;font-style:italic}
+ .fb-pre{color:#8b95a4;font-size:12px;margin:6px 0 8px}
  details.fb-sec{border-top:none;margin:6px 0 0;padding-top:0}
- details.fb-sec>summary{background:#f3f6fa;color:#1565c0;font-size:12px;padding:4px 10px}
+ details.fb-sec>summary{background:#1c2330;color:#bcd6f5;font-size:12px;padding:4px 10px}
 </style></head>
 <body>
  <div class="top"><h1>나비스 채널 피드백 보드 <span class="badge todo">공개 · 실명 비공개</span></h1>
