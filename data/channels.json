@@ -1,4 +1,108 @@
 {
-  "updated_at": "",
-  "channels": []
+  "updated_at": "2026-06-22",
+  "channels": [
+    {
+      "channel_id": "UC6zELO9jtnUqmN8SvhyrrDw",
+      "name": "수상한경제",
+      "title": "수상한경제",
+      "thumbnail": "https://yt3.ggpht.com/kie4dTjtyhEpt9Fv8ipC7_irN4nJu8zBh7Gla5E53Jqxtlm2aE_uobARmr569GPSRzEVbYsoEA=s88-c-k-c0x00ffffff-no-rj",
+      "subscribers": 22,
+      "total_views": 6666,
+      "video_count": 14,
+      "recent_videos": [
+        {
+          "video_id": "A_tN2C9Lr1M",
+          "title": "매달 300만원, 평생 받는 법 — 미국 배당 ETF 4대장 제대로 뜯어보기",
+          "published_at": "2026-06-22T12:51:30Z",
+          "views": 3,
+          "likes": 2,
+          "comments": 1,
+          "url": "https://youtu.be/A_tN2C9Lr1M"
+        },
+        {
+          "video_id": "TRbpUQeQOzk",
+          "title": "환율 1,500원 뉴노멀 시대, 당신이 몰랐던 원화 약세 4가지 진짜 이유",
+          "published_at": "2026-06-21T12:24:38Z",
+          "views": 15,
+          "likes": 2,
+          "comments": 0,
+          "url": "https://youtu.be/TRbpUQeQOzk"
+        },
+        {
+          "video_id": "hcwjlUxFwtA",
+          "title": "머스크가 스페이스X를 지금 상장시킨 진짜 이유…테슬라 합병 1조 달러 시나리오",
+          "published_at": "2026-06-21T11:23:08Z",
+          "views": 19,
+          "likes": 7,
+          "comments": 2,
+          "url": "https://youtu.be/hcwjlUxFwtA"
+        },
+        {
+          "video_id": "Zf9odyYnR10",
+          "title": "환율 1,500원 뉴노멀 시대, 당신이 몰랐던 원화 약세 4가지 진짜 이유",
+          "published_at": "2026-06-21T01:42:55Z",
+          "views": 2045,
+          "likes": 12,
+          "comments": 1,
+          "url": "https://youtu.be/Zf9odyYnR10"
+        },
+        {
+          "video_id": "-Nso5xY6cEY",
+          "title": "환율 1,500원 뉴노멀 시대, 당신이 몰랐던 원화 약세 4가지 진짜 이유",
+          "published_at": "2026-06-20T13:17:25Z",
+          "views": 2483,
+          "likes": 6,
+          "comments": 1,
+          "url": "https://youtu.be/-Nso5xY6cEY"
+        },
+        {
+          "video_id": "n_na_RwIoJE",
+          "title": "반도체로 뚫은 코스피 9000…지금 들어가면 위험한 이유",
+          "published_at": "2026-06-20T10:39:39Z",
+          "views": 33,
+          "likes": 2,
+          "comments": 4,
+          "url": "https://youtu.be/n_na_RwIoJE"
+        },
+        {
+          "video_id": "fCG_Uhzs6GY",
+          "title": "미쳐버린 스페이스X 주가, 한국인은 어떻게 사야 할까? (ft. 직접매수 vs ETF 4가지 비교)",
+          "published_at": "2026-06-19T10:46:17Z",
+          "views": 17,
+          "likes": 6,
+          "comments": 3,
+          "url": "https://youtu.be/fCG_Uhzs6GY"
+        },
+        {
+          "video_id": "ovGmMUv7nq8",
+          "title": "월드컵 광고는 완판인데 신용등급 CCC, JTBC 위태로운 진짜 이유",
+          "published_at": "2026-06-18T13:29:22Z",
+          "views": 1680,
+          "likes": 18,
+          "comments": 2,
+          "url": "https://youtu.be/ovGmMUv7nq8"
+        },
+        {
+          "video_id": "RLu-33flGuc",
+          "title": "환율 1,500원 뉴노멀 시대, 당신이 몰랐던 원화 약세 4가지 진짜 이유",
+          "published_at": "2026-06-18T13:16:57Z",
+          "views": 178,
+          "likes": 7,
+          "comments": 3,
+          "url": "https://youtu.be/RLu-33flGuc"
+        },
+        {
+          "video_id": "Z3Jhv0awLvw",
+          "title": "매출 10배 터진 월드컵 특수, 자영업자 망하는 4가지 수상한 이유",
+          "published_at": "2026-06-17T09:56:17Z",
+          "views": 43,
+          "likes": 4,
+          "comments": 3,
+          "url": "https://youtu.be/Z3Jhv0awLvw"
+        }
+      ],
+      "channel_url": "https://www.youtube.com/channel/UC6zELO9jtnUqmN8SvhyrrDw",
+      "member_note": ""
+    }
+  ]
 }
