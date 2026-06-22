@@ -1,163 +1,182 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>유튜브 채널 관리 대시보드</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>나비스 채널 피드백 보드 (비공개)</title>
 <style>
-  :root { --bg:#0f1115; --card:#1a1d24; --line:#2a2e38; --txt:#e7e9ee; --sub:#9aa0ad; --accent:#ff4d4d; }
-  * { box-sizing:border-box; }
-  body { margin:0; background:var(--bg); color:var(--txt);
-         font-family:-apple-system,"Segoe UI","Malgun Gothic",sans-serif; }
-  header { padding:20px 24px; border-bottom:1px solid var(--line);
-           display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }
-  header h1 { font-size:18px; margin:0; }
-  .updated { color:var(--sub); font-size:13px; }
-  .wrap { max-width:1100px; margin:0 auto; padding:24px; }
-  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:16px; }
-  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; }
-  .ch-head { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
-  .ch-head img { width:44px; height:44px; border-radius:50%; background:#333; }
-  .ch-name { font-weight:600; font-size:15px; }
-  .ch-name a { color:var(--txt); text-decoration:none; }
-  .stats { display:flex; gap:16px; margin:10px 0; }
-  .stat .n { font-size:18px; font-weight:700; }
-  .stat .l { font-size:11px; color:var(--sub); }
-  .vids { margin-top:10px; border-top:1px solid var(--line); padding-top:10px; }
-  .vid { display:flex; justify-content:space-between; gap:8px; padding:6px 0; font-size:13px; }
-  .vid a { color:var(--txt); text-decoration:none; overflow:hidden; text-overflow:ellipsis;
-           white-space:nowrap; max-width:200px; }
-  .vid .meta { color:var(--sub); white-space:nowrap; font-size:12px; }
-  h2 { font-size:15px; margin:28px 0 12px; color:var(--sub); }
-  .chartbox { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:16px; }
-  #gate { position:fixed; inset:0; background:var(--bg); display:flex; flex-direction:column;
-          align-items:center; justify-content:center; gap:12px; z-index:10; }
-  #gate input { padding:10px 14px; border-radius:8px; border:1px solid var(--line);
-                background:var(--card); color:var(--txt); font-size:15px; }
-  #gate button { padding:10px 20px; border:0; border-radius:8px; background:var(--accent);
-                 color:#fff; font-size:15px; cursor:pointer; }
-  .empty { color:var(--sub); padding:40px; text-align:center; }
-</style>
-</head>
+ :root{color-scheme:light}
+ body{font-family:system-ui,'Malgun Gothic',sans-serif;margin:0;background:#ffffff;color:#1a1f29}
+ .top{padding:18px 24px;background:#f5f7fa;border-bottom:1px solid #e3e8ef;position:sticky;top:0}
+ .top h1{margin:0;font-size:18px} .top p{margin:4px 0 0;color:#5b6573;font-size:13px}
+ .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:16px;padding:20px}
+ .card{background:#ffffff;border:1px solid #e3e8ef;border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+ .card h2{margin:0;font-size:17px} .card h2 a{color:#1565c0;text-decoration:none} .card h2 small{color:#7a8493;font-weight:400;font-size:13px}
+ .meta{margin:6px 0 12px;color:#5b6573;font-size:13px}
+ .badge{display:inline-block;background:#e7f0fb;color:#1565c0;border-radius:6px;padding:1px 7px;font-size:11px;margin-right:4px}
+ .badge.done{background:#e3f5e9;color:#1c7a43} .badge.todo{background:#fbf0dd;color:#9a6a12}
+ .btn{display:inline-block;background:#eef2f7;color:#1565c0;text-decoration:none;border-radius:8px;padding:6px 10px;font-size:13px;margin:0 6px 6px 0;border:1px solid #dde3ec}
+ .block{margin:10px 0} .block b{font-size:12px;color:#5b6573}
+ .chips{margin-top:5px} .chips a{display:inline-block;background:#eef2f7;color:#1565c0;text-decoration:none;border-radius:6px;padding:4px 9px;font-size:12px;margin:0 5px 5px 0;border:1px solid #dde3ec}
+ .thumbs{display:flex;flex-wrap:wrap;gap:6px;margin-top:5px} .thumbs img{width:120px;height:68px;object-fit:cover;border-radius:6px;background:#eee;border:1px solid #e3e8ef}
+ details{margin-top:10px;border-top:1px solid #e3e8ef;padding-top:8px}
+ summary{cursor:pointer;list-style:none;display:inline-block;background:#eef2f7;color:#1565c0;border-radius:8px;padding:6px 12px;font-size:13px;user-select:none;border:1px solid #dde3ec}
+ summary::-webkit-details-marker{display:none} details[open] summary{margin-bottom:6px}
+ .feedback{margin:6px 0 4px 4px;font-size:14px;line-height:1.55} .feedback h4{margin:12px 0 4px;color:#1565c0;font-size:14px} .feedback h5{margin:8px 0 2px;font-size:13px} .feedback p{margin:3px 0}
+ .feedback.empty{color:#8a93a0;font-style:italic}
+ .fb-pre{color:#7a8493;font-size:12px;margin:6px 0 8px}
+ details.fb-sec{border-top:none;margin:6px 0 0;padding-top:0}
+ details.fb-sec>summary{background:#f3f6fa;color:#1565c0;font-size:12px;padding:4px 10px}
+</style></head>
 <body>
+ <div class="top"><h1>나비스 채널 피드백 보드 <span class="badge todo">공개 · 실명 비공개</span></h1>
+   <p>채널 8개 · 피드백 완료 1/8 · 실명은 비공개로 처리됨</p><a class="btn" href="kpi.html" style="margin-top:8px">📊 채널 KPI 대시보드</a></div>
+ <div class="grid">
+    <section class="card">
+      <header>
+        <h2><a href="https://www.youtube.com/@econ_watchtower1" target="_blank">경제감시탑</a>
+            <small>@econ_watchtower1</small></h2>
+        <div class="meta"><span class="badge">나비스1기</span>
+            담당 비공개 <span class="badge done">피드백 완료</span></div>
+      </header>
+      <div class="links"><a class="btn" href="https://drive.google.com/file/d/1HFaebzl3r4_VLb5GzVp0XbtUuxris6SK/view" target="_blank">📄 대본지침</a><a class="btn" href="https://drive.google.com/file/d/1m03fqlObr4FqKwITLtfujlb2IrPDkZKy/view" target="_blank">🖼 이미지지침</a></div>
+      <div class="block"><b>최근 대본</b><div class="chips"><a href="https://drive.google.com/file/d/10MkeyQ2dl0oRco7kwO-W2zXWfkD9jIdf/view" target="_blank">대본 1</a><a href="https://drive.google.com/file/d/1eKK1ogSter2OP9xK1Q7e4jiOx1B-tk-o/view" target="_blank">대본 2</a><a href="https://drive.google.com/file/d/1ny0SGWlBdvW-b-Szyd0kmegPziJ8Ibwn/view" target="_blank">대본 3</a></div></div>
+      <div class="block"><b>최근 섬네일</b><div class="thumbs"><a href="https://drive.google.com/file/d/1NG3ABrm_ZRc2PqfC02FWgYe8vMlUdFL_/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1NG3ABrm_ZRc2PqfC02FWgYe8vMlUdFL_&sz=w480" alt="섬네일 1"></a><a href="https://drive.google.com/file/d/1kLgPe53qPkN-WtMrw8_buv9x-2zHesSr/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1kLgPe53qPkN-WtMrw8_buv9x-2zHesSr&sz=w480" alt="섬네일 2"></a><a href="https://drive.google.com/file/d/12MzGdRuj4H1tfhoX41bvp8BDPYiRD8iT/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=12MzGdRuj4H1tfhoX41bvp8BDPYiRD8iT&sz=w480" alt="섬네일 3"></a></div></div>
+      <details>
+        <summary>▸ 피드백 산출물 펼치기</summary>
+        <div class="fb-pre"><p>원본 대본: &quot;코스피 사상 첫 9000 — 외국인이 만든 신고가의 함정&quot; (1번 대본 기준)</p></div><details class="fb-sec"><summary>▹ 새 대본 지침</summary><div class="feedback"><p>채널 정체성 — &quot;감시탑&quot;: 군중이 환호할 때 한 박자 멈춰 &quot;누가, 왜&quot;를 세어보는 비판적 경제 해설.</p>
 
-<!-- 간단한 비밀번호 게이트 (정적 사이트라 강력하진 않음 — README 참고) -->
-<div id="gate">
-  <div style="font-size:16px;">🔒 대시보드 접근</div>
-  <input id="pw" type="password" placeholder="비밀번호" autofocus>
-  <button onclick="checkPw()">입장</button>
-  <div id="pwmsg" style="color:var(--accent);font-size:13px;height:16px;"></div>
-</div>
+<p>- **한 영상 = 한 메시지.** 이 영상의 메시지는 &quot;이 신고가는 외국인·반도체·환율 등 우리 손 밖 변수가 만든 것&quot;이다. 모든 문단이 이 한 줄을 향하게 한다.</p>
+<p>- **구조 5단:** ① 훅(역설 1문장) ② 사실 정리(수치) ③ 함정 3개(중복 없이 각기 다른 축) ④ 봐야 할 신호 3가지 ⑤ 정리 + CTA.</p>
+<p>- **수치는 필수, 반복은 금지.** &quot;외국인이 차린 잔치&quot; 같은 핵심 비유는 훅·정리 2회까지만. 본문에서 재반복하지 않는다.</p>
+<p>- **개미를 가르치되 겁주지 않는다.** &quot;팔아라/사라&quot; 단정 금지, &quot;어디를 보라&quot;로 끝낸다.</p>
+<p>- **길이:** 본문 1,200~1,500자 목표(현재 약 2,000자 → 약 30% 압축).</p></div></details><details class="fb-sec"><summary>▹ 대본 수정 방향</summary><div class="feedback"><p>식별된 문제점과 고칠 방향:</p>
 
-<header>
-  <h1>유튜브 채널 관리 대시보드</h1>
-  <div class="updated" id="updated">불러오는 중…</div>
-</header>
+<p>1. **함정 2·3 중복** — 함정2(외국인은 변덕스럽다)와 함정3(외국인은 반도체만 산다)이 &quot;외국인 수급 리스크&quot;로 겹친다. → 함정을 *서로 다른 축*으로 재배치: ①주체(개미 아닌 외국인) ②연료(반도체 2종목 쏠림) ③환율(차익 실현 트리거). &quot;변덕&quot;은 별도 함정이 아니라 세 함정을 관통하는 결론으로 내린다.</p>
+<p>2. **핵심 비유 과반복** — &quot;외국인이 차린 잔치&quot;가 5회 이상. → 훅과 마무리에만 두고 본문은 사실·수치로 채운다.</p>
+<p>3. **마무리 CTA 과다** — 끝부분 설교·CTA가 길다. → 신호 3가지로 닫고, 구독 유도는 2문장 이내.</p>
+<p>4. **훅 군더더기** — 도입에 배경 설명이 먼저 나와 임팩트가 분산. → 첫 3문장 안에 역설(&quot;개미가 아니라 외국인이 만든 신고가&quot;)을 박는다.</p></div></details><details class="fb-sec"><summary>▹ 대본 리라이트 샘플</summary><div class="feedback"><p>(도입부 + 함정① 발췌 — 위 지침·방향 반영, 압축·역설 강화)</p>
 
-<div class="wrap" id="main" style="display:none;">
-  <div class="grid" id="cards"></div>
-  <h2>구독자 추이</h2>
-  <div class="chartbox"><canvas id="subsChart" height="110"></canvas></div>
-  <h2>누적 조회수 추이</h2>
-  <div class="chartbox"><canvas id="viewsChart" height="110"></canvas></div>
-</div>
+<p>**[훅]**</p>
+<p>코스피가 사상 처음 9000을 뚫었어. 다들 &quot;드디어 9000 시대&quot;라며 환호하지. 그런데 이 신고가를 *누가* 만들었는지 보면 멈칫하게 돼. 개미가 아니었어. 외국인이야. 그리고 외국인이 만든 잔치는, 외국인이 마음먹는 순간 끝나.</p>
 
-<script>
-// ── 비밀번호 게이트 ──────────────────────────────
-// 약한 보호임(소스에 해시가 들어감). 진짜 보안이 필요하면 README의 Cloudflare Access 참고.
-// 비밀번호 바꾸려면 아래 PW_PLAIN 을 수정. (기본값: changeme)
-const PW_PLAIN = "changeme";
-function checkPw(){
-  const v = document.getElementById('pw').value;
-  if (v === PW_PLAIN){
-    sessionStorage.setItem('ok','1');
-    document.getElementById('gate').style.display='none';
-    document.getElementById('main').style.display='block';
-    init();
-  } else {
-    document.getElementById('pwmsg').textContent = '비밀번호가 틀렸습니다.';
-  }
-}
-document.getElementById('pw').addEventListener('keydown',e=>{ if(e.key==='Enter') checkPw(); });
-if (sessionStorage.getItem('ok')==='1'){
-  document.getElementById('gate').style.display='none';
-  document.getElementById('main').style.display='block';
-  init();   // script가 body 끝이라 DOM은 이미 준비됨 — 바로 호출 (재방문 시 빈 화면 방지)
-}
+<p>**[사실 정리]**</p>
+<p>지난 18일 코스피는 2.25% 오른 9,063으로 마감, 장중 9,106까지 신고가. 1월 5000을 넘은 지 다섯 달 만에 9000이야. 그런데 같은 날 코스닥은 3% 넘게 빠졌어. 시장 전체가 좋은 게 아니라, 대형주 몇 개로만 돈이 쏠렸다는 신호지.</p>
 
-// ── 데이터 로드 & 렌더 ───────────────────────────
-const fmt = n => (n||0).toLocaleString('ko-KR');
-const when = iso => { if(!iso) return ''; const d=new Date(iso);
-  return `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`; };
+<p>**[함정①: 만든 건 개미가 아니다]**</p>
+<p>그날 외국인은 코스피에서 1조 2,800억을 순매수했어. 반대로 개인은 3,800억, 기관은 7,700억을 순매도. 그림이 이래 — 외국인이 사고, 개미·기관이 판 날에 9000이 뚫린 거야. 신고가에 환호한 개미가, 정작 그 상승의 몫은 외국인에게 넘긴 날이었던 거지. 늘 그래. 외국인이 아래에서 살 땐 무서워서 못 사다가, 다 오른 꼭대기에서야 &quot;나만 놓칠까&quot; 조급해 올라타거든.</p>
 
-async function init(){
-  let snap, hist=[];
-  try { snap = await (await fetch('./data/channels.json?_='+Date.now())).json(); }
-  catch(e){ document.getElementById('cards').innerHTML =
-    '<div class="empty">아직 수집된 자료가 없습니다. 일일 수집이 1회 이상 돌면 표시됩니다.</div>'; return; }
-  try { hist = await (await fetch('./data/history.json?_='+Date.now())).json(); } catch(e){}
+<p>*(이하 함정②·③, 신호 3가지, 마무리는 같은 톤으로 이어서 작성)*</p></div></details>
+      </details>
+    </section>
 
-  document.getElementById('updated').textContent = '업데이트: ' + (snap.updated_at||'-');
-  renderCards(snap.channels||[]);
-  renderCharts(hist||[]);
-}
+    <section class="card">
+      <header>
+        <h2><a href="https://www.youtube.com/@moneyteacher101" target="_blank">재테크샘</a>
+            <small>@moneyteacher101</small></h2>
+        <div class="meta"><span class="badge">나비스1기</span>
+            담당 비공개 <span class="badge todo">피드백 대기</span></div>
+      </header>
+      <div class="links"><a class="btn" href="https://drive.google.com/file/d/1i4Gku_J-3eiFa6HDFVquLepOoeFDSBBR/view" target="_blank">📄 대본지침</a><a class="btn" href="https://drive.google.com/file/d/1vIZ0iTYBJocTctHYgCMEVqHCTBfK7-Gq/view" target="_blank">🖼 이미지지침</a></div>
+      <div class="block"><b>최근 대본</b><div class="chips"><a href="https://drive.google.com/file/d/1RR1rT0OCXlsZI4eX5TolG_Wgm47p4tdb/view" target="_blank">대본 1</a><a href="https://drive.google.com/file/d/1XHIJnhyxWgQbAa81I3RK7gSODGVoTyuT/view" target="_blank">대본 2</a><a href="https://drive.google.com/file/d/1WlC_iCC39QGSZB3Qs2oD6ie-EaMuZr9a/view" target="_blank">대본 3</a></div></div>
+      <div class="block"><b>최근 섬네일</b><div class="thumbs"><a href="https://drive.google.com/file/d/1XcdxuadAYGmFAWFVkfneCETswmjyKLla/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1XcdxuadAYGmFAWFVkfneCETswmjyKLla&sz=w480" alt="섬네일 1"></a><a href="https://drive.google.com/file/d/19I2q6l5Q-AaPq4yAU9EbM_PGcoWVeIHg/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=19I2q6l5Q-AaPq4yAU9EbM_PGcoWVeIHg&sz=w480" alt="섬네일 2"></a><a href="https://drive.google.com/file/d/1b_7xr1o_VhIb7XpCwCKVDKAemGjfJTfl/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1b_7xr1o_VhIb7XpCwCKVDKAemGjfJTfl&sz=w480" alt="섬네일 3"></a></div></div>
+      <details>
+        <summary>▸ 피드백 산출물 펼치기</summary>
+        <div class="feedback empty">아직 피드백 산출물이 없습니다. (새 대본지침 · 수정방향 · 리라이트샘플)</div>
+      </details>
+    </section>
 
-function renderCards(channels){
-  const box = document.getElementById('cards');
-  if(!channels.length){ box.innerHTML='<div class="empty">등록된 채널이 없습니다.</div>'; return; }
-  box.innerHTML = channels.map(c => `
-    <div class="card">
-      <div class="ch-head">
-        <img src="${c.thumbnail||''}" alt="">
-        <div>
-          <div class="ch-name"><a href="${c.channel_url}" target="_blank">${c.name||c.title}</a></div>
-          <div class="updated">영상 ${fmt(c.video_count)}개</div>
-        </div>
-      </div>
-      <div class="stats">
-        <div class="stat"><div class="n">${fmt(c.subscribers)}</div><div class="l">구독자</div></div>
-        <div class="stat"><div class="n">${fmt(c.total_views)}</div><div class="l">누적 조회수</div></div>
-      </div>
-      <div class="vids">
-        ${(c.recent_videos||[]).slice(0,5).map(v => `
-          <div class="vid">
-            <a href="${v.url}" target="_blank" title="${v.title}">${v.title}</a>
-            <span class="meta">${when(v.published_at)} · ${fmt(v.views)}회</span>
-          </div>`).join('') || '<div class="updated">최근 영상 없음</div>'}
-      </div>
-    </div>`).join('');
-}
+    <section class="card">
+      <header>
+        <h2><a href="https://www.youtube.com/@memory_dam" target="_blank">추억담</a>
+            <small>@memory_dam</small></h2>
+        <div class="meta"><span class="badge">나비스1기</span>
+            담당 비공개 <span class="badge todo">피드백 대기</span></div>
+      </header>
+      <div class="links"><a class="btn" href="https://drive.google.com/file/d/1KYb1tPYVukbWAnzC9EorlTKH9EAIU2Q_/view" target="_blank">📄 대본지침</a><a class="btn" href="https://drive.google.com/file/d/1V1ZKSFbkacBk_YxxqqpwnP3drEGMQrn4/view" target="_blank">🖼 이미지지침</a></div>
+      <div class="block"><b>최근 대본</b><div class="chips"><a href="https://drive.google.com/file/d/1Gzu_KqU_KHMrbTs6N0QirNA5fgIzR1hL/view" target="_blank">대본 1</a><a href="https://drive.google.com/file/d/120G49aZcZZgpv0M6gIAFQFzEF2nfhR81/view" target="_blank">대본 2</a><a href="https://drive.google.com/file/d/16Sf4m_fjfDtQKwN1uoJkk6YnUt--mkJV/view" target="_blank">대본 3</a></div></div>
+      <div class="block"><b>최근 섬네일</b><div class="thumbs"><a href="https://drive.google.com/file/d/1zCBzZYkhb7znq1oZLZho6i7GV0uGDjfZ/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1zCBzZYkhb7znq1oZLZho6i7GV0uGDjfZ&sz=w480" alt="섬네일 1"></a><a href="https://drive.google.com/file/d/1VtF24jyUwA9xVB1gpBTHS0iMFAnITRWa/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1VtF24jyUwA9xVB1gpBTHS0iMFAnITRWa&sz=w480" alt="섬네일 2"></a><a href="https://drive.google.com/file/d/1hjFCISx5n4Jh6ZATvh4No1RFwtlulPbL/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1hjFCISx5n4Jh6ZATvh4No1RFwtlulPbL&sz=w480" alt="섬네일 3"></a></div></div>
+      <details>
+        <summary>▸ 피드백 산출물 펼치기</summary>
+        <div class="feedback empty">아직 피드백 산출물이 없습니다. (새 대본지침 · 수정방향 · 리라이트샘플)</div>
+      </details>
+    </section>
 
-let charts = {};
-function renderCharts(history){
-  if(!history.length) return;
-  const dates = history.map(h => h.date);
-  // 채널 id 모음
-  const ids = {};
-  history.forEach(h => Object.entries(h.channels||{}).forEach(([id,v]) => ids[id]=v.name));
-  const palette = ['#ff4d4d','#4d9dff','#4dffb0','#ffd24d','#b04dff','#ff8c4d','#4dffff'];
+    <section class="card">
+      <header>
+        <h2><a href="https://www.youtube.com/@수상한경제" target="_blank">수상한경제</a>
+            <small>@수상한경제</small></h2>
+        <div class="meta"><span class="badge">나비스1기</span>
+            담당 비공개 <span class="badge todo">피드백 대기</span></div>
+      </header>
+      <div class="links"><a class="btn" href="https://drive.google.com/file/d/18HQJtb-g46__ATfmD4qgGh-H8Zcm3Eu3/view" target="_blank">📄 대본지침</a><a class="btn" href="https://drive.google.com/file/d/1CJ6mKC-Q9J0NcatDRzcmbWQAtSbSz-Cx/view" target="_blank">🖼 이미지지침</a></div>
+      <div class="block"><b>최근 대본</b><div class="chips"><a href="https://drive.google.com/file/d/1nV-Udw9U_yxFgn8OLF1J86ZFpn13U56q/view" target="_blank">대본 1</a><a href="https://drive.google.com/file/d/1xN1L-g-7ZwG3CbGi76KzuxiByWXrNRAo/view" target="_blank">대본 2</a><a href="https://drive.google.com/file/d/1RuAlMzdfIFyXKOB_PNZuaK374UQ3qkWi/view" target="_blank">대본 3</a></div></div>
+      <div class="block"><b>최근 섬네일</b><div class="thumbs"><a href="https://drive.google.com/file/d/18A7zn7MC-95uJKKF5zfqkLbxaI5W7XyZ/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=18A7zn7MC-95uJKKF5zfqkLbxaI5W7XyZ&sz=w480" alt="섬네일 1"></a><a href="https://drive.google.com/file/d/1ysiU5KYuon0ur0GYQI3i4m9J4IV5apli/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1ysiU5KYuon0ur0GYQI3i4m9J4IV5apli&sz=w480" alt="섬네일 2"></a><a href="https://drive.google.com/file/d/1W3opyeM8UQXRVMw3K_p9IviTiYYhzF1_/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1W3opyeM8UQXRVMw3K_p9IviTiYYhzF1_&sz=w480" alt="섬네일 3"></a></div></div>
+      <details>
+        <summary>▸ 피드백 산출물 펼치기</summary>
+        <div class="feedback empty">아직 피드백 산출물이 없습니다. (새 대본지침 · 수정방향 · 리라이트샘플)</div>
+      </details>
+    </section>
 
-  function series(field){
-    return Object.keys(ids).map((id,i) => ({
-      label: ids[id],
-      data: history.map(h => (h.channels[id]||{})[field] ?? null),
-      borderColor: palette[i%palette.length],
-      backgroundColor: palette[i%palette.length],
-      tension:0.25, spanGaps:true,
-    }));
-  }
-  const opts = { responsive:true, plugins:{legend:{labels:{color:'#9aa0ad'}}},
-    scales:{ x:{ticks:{color:'#9aa0ad'},grid:{color:'#2a2e38'}},
-             y:{ticks:{color:'#9aa0ad'},grid:{color:'#2a2e38'}} } };
+    <section class="card">
+      <header>
+        <h2><a href="https://www.youtube.com/@jaetech_tong" target="_blank">재태크통</a>
+            <small>@jaetech_tong</small></h2>
+        <div class="meta"><span class="badge">나비스1기</span>
+            담당 비공개 <span class="badge todo">피드백 대기</span></div>
+      </header>
+      <div class="links"><a class="btn" href="https://drive.google.com/file/d/1jEoTg1gtdcQZ_ff5Wjt6q5bAQ-XmTPsD/view" target="_blank">📄 대본지침</a><a class="btn" href="https://drive.google.com/file/d/1P1WGGooMBKt6r3T6B9X1gsaNStzEqgmX/view" target="_blank">🖼 이미지지침</a></div>
+      <div class="block"><b>최근 대본</b><div class="chips"><a href="https://drive.google.com/file/d/1VPf0IoiopNu9TEXcCUeBBD5fDCFv3uEd/view" target="_blank">대본 1</a><a href="https://drive.google.com/file/d/1Y0jdvRBFgtKrJoxlZ33oNEZwW9gGKUwb/view" target="_blank">대본 2</a><a href="https://drive.google.com/file/d/1wujyjstmm3ItOf8stH3RbJ-fWuWt5krW/view" target="_blank">대본 3</a></div></div>
+      <div class="block"><b>최근 섬네일</b><div class="thumbs"><a href="https://drive.google.com/file/d/1ePsCyYe_irpg94kog9hcwHrv3SKogEzU/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1ePsCyYe_irpg94kog9hcwHrv3SKogEzU&sz=w480" alt="섬네일 1"></a><a href="https://drive.google.com/file/d/1FpcmWiqeuS6lqZWMzx2eHpDGR5DyvhgT/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1FpcmWiqeuS6lqZWMzx2eHpDGR5DyvhgT&sz=w480" alt="섬네일 2"></a><a href="https://drive.google.com/file/d/1PGajBBT19Y824zLdURkgI7kql5Zp589k/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1PGajBBT19Y824zLdURkgI7kql5Zp589k&sz=w480" alt="섬네일 3"></a></div></div>
+      <details>
+        <summary>▸ 피드백 산출물 펼치기</summary>
+        <div class="feedback empty">아직 피드백 산출물이 없습니다. (새 대본지침 · 수정방향 · 리라이트샘플)</div>
+      </details>
+    </section>
 
-  if(charts.subs) charts.subs.destroy();
-  if(charts.views) charts.views.destroy();
-  charts.subs = new Chart(document.getElementById('subsChart'),
-    { type:'line', data:{labels:dates, datasets:series('subscribers')}, options:opts });
-  charts.views = new Chart(document.getElementById('viewsChart'),
-    { type:'line', data:{labels:dates, datasets:series('total_views')}, options:opts });
-}
-</script>
-</body>
-</html>
+    <section class="card">
+      <header>
+        <h2><a href="https://www.youtube.com/@yeoksahankan" target="_blank">역사한칸</a>
+            <small>@yeoksahankan</small></h2>
+        <div class="meta"><span class="badge">나비스1기</span>
+            담당 비공개 <span class="badge todo">피드백 대기</span></div>
+      </header>
+      <div class="links"><a class="btn" href="https://drive.google.com/file/d/1bWmQC9px8BXq5Ektb9-qlmeYibvfhyNH/view" target="_blank">📄 대본지침</a><a class="btn" href="https://drive.google.com/file/d/1K-omUin2n5VVMFFelID3QkJUUTLqGAvC/view" target="_blank">🖼 이미지지침</a></div>
+      <div class="block"><b>최근 대본</b><div class="chips"><a href="https://drive.google.com/file/d/1wdEbGVa3iJdG20OT8m0wwfzr6OyQL603/view" target="_blank">대본 1</a><a href="https://drive.google.com/file/d/11bK96Sb1rbZD2C_3sxvHfkFwtvu-9O1T/view" target="_blank">대본 2</a><a href="https://drive.google.com/file/d/1gRCQub6fWINZoaHFXUak6_7O1e9YrLf5/view" target="_blank">대본 3</a></div></div>
+      <div class="block"><b>최근 섬네일</b><div class="thumbs"><a href="https://drive.google.com/file/d/1vbr9zI9QlEb82kkUN9-8ljoTu2T8Xn4V/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1vbr9zI9QlEb82kkUN9-8ljoTu2T8Xn4V&sz=w480" alt="섬네일 1"></a><a href="https://drive.google.com/file/d/1rzA3-8671Ydn2cEcTr8QQVPt5vyrgTDe/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1rzA3-8671Ydn2cEcTr8QQVPt5vyrgTDe&sz=w480" alt="섬네일 2"></a><a href="https://drive.google.com/file/d/1i1k1GVXeoWzxvDW_nmKJhFjKXGAKzgDw/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1i1k1GVXeoWzxvDW_nmKJhFjKXGAKzgDw&sz=w480" alt="섬네일 3"></a></div></div>
+      <details>
+        <summary>▸ 피드백 산출물 펼치기</summary>
+        <div class="feedback empty">아직 피드백 산출물이 없습니다. (새 대본지침 · 수정방향 · 리라이트샘플)</div>
+      </details>
+    </section>
+
+    <section class="card">
+      <header>
+        <h2><a href="https://www.youtube.com/@경제리포터" target="_blank">경제리포터</a>
+            <small>@경제리포터</small></h2>
+        <div class="meta"><span class="badge">나비스1기</span>
+            담당 비공개 <span class="badge todo">피드백 대기</span></div>
+      </header>
+      <div class="links"><a class="btn" href="https://drive.google.com/file/d/1cEoN-MQGlXLBXs1VXEbMb7yJKgxbBlse/view" target="_blank">📄 대본지침</a><a class="btn" href="https://drive.google.com/file/d/1YilDUsHGUd5-6K9T8TqJqwFHr3ak3XRg/view" target="_blank">🖼 이미지지침</a></div>
+      <div class="block"><b>최근 대본</b><div class="chips"><a href="https://drive.google.com/file/d/16voeW8ZC2NF1qTnWnN4cV8GV38jNO98Q/view" target="_blank">대본 1</a><a href="https://drive.google.com/file/d/1w56GUaOmjhuRRztKF11Y6rYE9zi-vOi5/view" target="_blank">대본 2</a><a href="https://drive.google.com/file/d/16V8p9HC35VR-E03saAbRpRZ94UtByo0k/view" target="_blank">대본 3</a><a href="https://drive.google.com/file/d/1h1zEHQRSdQVTVcil1SIHeqjKoyK3jNpi/view" target="_blank">대본 4</a><a href="https://drive.google.com/file/d/1Q15JTw_PbUBKWGLFyXpJs2bLv-aqd3L4/view" target="_blank">대본 5</a></div></div>
+      <div class="block"><b>최근 섬네일</b><div class="thumbs"><a href="https://drive.google.com/file/d/1g_IhFnzSfkMTVqZKOEdLv94rhQAWM-EX/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1g_IhFnzSfkMTVqZKOEdLv94rhQAWM-EX&sz=w480" alt="섬네일 1"></a><a href="https://drive.google.com/file/d/1f9dWSCFhPQ0pWYWJz4m7-xhD7xv5qQZO/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1f9dWSCFhPQ0pWYWJz4m7-xhD7xv5qQZO&sz=w480" alt="섬네일 2"></a><a href="https://drive.google.com/file/d/1cdU8ShhmFJ-rFRHT6_qzYMmXTm3yryYJ/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1cdU8ShhmFJ-rFRHT6_qzYMmXTm3yryYJ&sz=w480" alt="섬네일 3"></a><a href="https://drive.google.com/file/d/1EzGxcTvVLzMexp8iYC7_SweiUwPWM7Ui/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1EzGxcTvVLzMexp8iYC7_SweiUwPWM7Ui&sz=w480" alt="섬네일 4"></a><a href="https://drive.google.com/file/d/1vlYW8IHSzg7f6JYM9Vo_RXo_Oyvz7I_H/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1vlYW8IHSzg7f6JYM9Vo_RXo_Oyvz7I_H&sz=w480" alt="섬네일 5"></a></div></div>
+      <details>
+        <summary>▸ 피드백 산출물 펼치기</summary>
+        <div class="feedback empty">아직 피드백 산출물이 없습니다. (새 대본지침 · 수정방향 · 리라이트샘플)</div>
+      </details>
+    </section>
+
+    <section class="card">
+      <header>
+        <h2><a href="https://www.youtube.com/channel/UCkSspl2u1nIaPBTCDoeovnQ" target="_blank">이야기서랍</a>
+            <small></small></h2>
+        <div class="meta"><span class="badge">나비스1기</span>
+            담당 비공개 <span class="badge todo">피드백 대기</span></div>
+      </header>
+      <div class="links"><a class="btn" href="https://drive.google.com/file/d/1Duv4Xu5pShBQPkyhT2UfU60ktbFWhLJa/view" target="_blank">📄 대본지침</a><a class="btn" href="https://drive.google.com/file/d/1zdwDc-Sln0mU6FM8OzM4e0Omw0RLnkdA/view" target="_blank">🖼 이미지지침</a></div>
+      <div class="block"><b>최근 대본</b><div class="chips"><a href="https://drive.google.com/file/d/1EcaHRGAWRkAANTE_i-wiBJ9ghmnW-FrO/view" target="_blank">대본 1</a><a href="https://drive.google.com/file/d/1igzz8bYhsd8_mUpl0XBnP0-8_dmC7Yti/view" target="_blank">대본 2</a><a href="https://drive.google.com/file/d/1rgA_Y_buoB0dX0LrjuFgGUzqWttFJxUR/view" target="_blank">대본 3</a></div></div>
+      <div class="block"><b>최근 섬네일</b><div class="thumbs"><a href="https://drive.google.com/file/d/1i79SfKs5vjLka56BPRI2IlqzhzOEEAXr/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1i79SfKs5vjLka56BPRI2IlqzhzOEEAXr&sz=w480" alt="섬네일 1"></a><a href="https://drive.google.com/file/d/1zwXMNHdBymDpzTlArZZxlMxoVgBSC0lb/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1zwXMNHdBymDpzTlArZZxlMxoVgBSC0lb&sz=w480" alt="섬네일 2"></a><a href="https://drive.google.com/file/d/1fZRGKB2lMCd01N42a16imJ629oDRaTEO/view" target="_blank"><img loading="lazy" src="https://drive.google.com/thumbnail?id=1fZRGKB2lMCd01N42a16imJ629oDRaTEO&sz=w480" alt="섬네일 3"></a></div></div>
+      <details>
+        <summary>▸ 피드백 산출물 펼치기</summary>
+        <div class="feedback empty">아직 피드백 산출물이 없습니다. (새 대본지침 · 수정방향 · 리라이트샘플)</div>
+      </details>
+    </section></div>
+</body></html>
