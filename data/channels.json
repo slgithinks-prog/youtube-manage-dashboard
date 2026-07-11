@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-10",
+  "updated_at": "2026-07-11",
   "channels": [
     {
       "channel_id": "UC6zELO9jtnUqmN8SvhyrrDw",
@@ -7,14 +7,23 @@
       "title": "수상한경제",
       "thumbnail": "https://yt3.ggpht.com/kie4dTjtyhEpt9Fv8ipC7_irN4nJu8zBh7Gla5E53Jqxtlm2aE_uobARmr569GPSRzEVbYsoEA=s88-c-k-c0x00ffffff-no-rj",
       "subscribers": 43,
-      "total_views": 9342,
-      "video_count": 26,
+      "total_views": 9380,
+      "video_count": 27,
       "recent_videos": [
+        {
+          "video_id": "s0AqEvoIeWY",
+          "title": "\"미국·이란 다시 전쟁 터졌다\" 개미들이 절대 모르는, 이번 사태 진짜 뇌관 하나",
+          "published_at": "2026-07-11T02:39:18Z",
+          "views": 3,
+          "likes": 3,
+          "comments": 3,
+          "url": "https://youtu.be/s0AqEvoIeWY"
+        },
         {
           "video_id": "j6FP34-QM_s",
           "title": "삼성전자 SK하이닉스 지금 던지면 안 되는 이유, 한 주라도 있다면 '이 숫자'만 보세요",
           "published_at": "2026-07-09T12:17:14Z",
-          "views": 10,
+          "views": 17,
           "likes": 6,
           "comments": 6,
           "url": "https://youtu.be/j6FP34-QM_s"
@@ -23,7 +32,7 @@
           "video_id": "whE__K7apf4",
           "title": "SK하이닉스 7월 10일 나스닥 ADR 상장, 내 주식은 떡상할까?",
           "published_at": "2026-07-08T12:27:00Z",
-          "views": 17,
+          "views": 19,
           "likes": 5,
           "comments": 5,
           "url": "https://youtu.be/whE__K7apf4"
@@ -32,7 +41,7 @@
           "video_id": "CERcmQ22qUg",
           "title": "배당금으로 생활 하려면, 지금 얼마를 투자해야할까?",
           "published_at": "2026-07-03T11:19:52Z",
-          "views": 31,
+          "views": 33,
           "likes": 5,
           "comments": 7,
           "url": "https://youtu.be/CERcmQ22qUg"
@@ -50,7 +59,7 @@
           "video_id": "-HYzDyKeTdk",
           "title": "광주 800조 반도체 발표…평택을 놓친 분들이 지금 봐야 할 부동산",
           "published_at": "2026-07-01T11:30:53Z",
-          "views": 40,
+          "views": 41,
           "likes": 9,
           "comments": 7,
           "url": "https://youtu.be/-HYzDyKeTdk"
@@ -86,19 +95,10 @@
           "video_id": "e_zyCeKiAN8",
           "title": "SK하이닉스 12조 소각 후 45조 증자? 증권사도 숨긴 그들의 진짜 의도",
           "published_at": "2026-06-27T11:48:07Z",
-          "views": 209,
+          "views": 211,
           "likes": 9,
           "comments": 5,
           "url": "https://youtu.be/e_zyCeKiAN8"
-        },
-        {
-          "video_id": "AQeG_touFU8",
-          "title": "1억을 20억으로 키우는 4가지 방법 | 99%가 놓치는 부자의 공식",
-          "published_at": "2026-06-26T10:22:06Z",
-          "views": 545,
-          "likes": 12,
-          "comments": 3,
-          "url": "https://youtu.be/AQeG_touFU8"
         }
       ],
       "channel_url": "https://www.youtube.com/channel/UC6zELO9jtnUqmN8SvhyrrDw",
