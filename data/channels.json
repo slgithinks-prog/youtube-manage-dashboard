@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-12",
+  "updated_at": "2026-07-13",
   "channels": [
     {
       "channel_id": "UC6zELO9jtnUqmN8SvhyrrDw",
@@ -7,15 +7,24 @@
       "title": "수상한경제",
       "thumbnail": "https://yt3.ggpht.com/kie4dTjtyhEpt9Fv8ipC7_irN4nJu8zBh7Gla5E53Jqxtlm2aE_uobARmr569GPSRzEVbYsoEA=s88-c-k-c0x00ffffff-no-rj",
       "subscribers": 43,
-      "total_views": 9394,
-      "video_count": 27,
+      "total_views": 9713,
+      "video_count": 28,
       "recent_videos": [
+        {
+          "video_id": "f4e1PwqX1f4",
+          "title": "\"아무도 안 볼 때 시장은 방향을 바꾼다\" 크립토에 조용히 켜진 신호 세 개 (CLARITY법 8월 방아쇠)",
+          "published_at": "2026-07-12T04:55:13Z",
+          "views": 9,
+          "likes": 6,
+          "comments": 6,
+          "url": "https://youtu.be/f4e1PwqX1f4"
+        },
         {
           "video_id": "s0AqEvoIeWY",
           "title": "\"미국·이란 다시 전쟁 터졌다\" 개미들이 절대 모르는, 이번 사태 진짜 뇌관 하나",
           "published_at": "2026-07-11T02:39:18Z",
-          "views": 38,
-          "likes": 6,
+          "views": 264,
+          "likes": 8,
           "comments": 4,
           "url": "https://youtu.be/s0AqEvoIeWY"
         },
@@ -23,8 +32,8 @@
           "video_id": "j6FP34-QM_s",
           "title": "삼성전자 SK하이닉스 지금 던지면 안 되는 이유, 한 주라도 있다면 '이 숫자'만 보세요",
           "published_at": "2026-07-09T12:17:14Z",
-          "views": 40,
-          "likes": 6,
+          "views": 80,
+          "likes": 7,
           "comments": 6,
           "url": "https://youtu.be/j6FP34-QM_s"
         },
@@ -32,7 +41,7 @@
           "video_id": "whE__K7apf4",
           "title": "SK하이닉스 7월 10일 나스닥 ADR 상장, 내 주식은 떡상할까?",
           "published_at": "2026-07-08T12:27:00Z",
-          "views": 32,
+          "views": 34,
           "likes": 6,
           "comments": 5,
           "url": "https://youtu.be/whE__K7apf4"
@@ -41,7 +50,7 @@
           "video_id": "CERcmQ22qUg",
           "title": "배당금으로 생활 하려면, 지금 얼마를 투자해야할까?",
           "published_at": "2026-07-03T11:19:52Z",
-          "views": 36,
+          "views": 37,
           "likes": 5,
           "comments": 7,
           "url": "https://youtu.be/CERcmQ22qUg"
@@ -90,15 +99,6 @@
           "likes": 6,
           "comments": 1,
           "url": "https://youtu.be/7GmKK1VQ36w"
-        },
-        {
-          "video_id": "e_zyCeKiAN8",
-          "title": "SK하이닉스 12조 소각 후 45조 증자? 증권사도 숨긴 그들의 진짜 의도",
-          "published_at": "2026-06-27T11:48:07Z",
-          "views": 211,
-          "likes": 9,
-          "comments": 5,
-          "url": "https://youtu.be/e_zyCeKiAN8"
         }
       ],
       "channel_url": "https://www.youtube.com/channel/UC6zELO9jtnUqmN8SvhyrrDw",
